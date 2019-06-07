@@ -1,3 +1,5 @@
+import random
+from testix import fake
 from testix import argumentexpectations
 from testix import scenario
 from testix import call_formatter
@@ -12,6 +14,20 @@ class Call:
         self._unordered = False
         self._everlasting = False
         self._throwing = False
+
+    def __enter__(self):
+        fake_context = fake.Fake(self._fake_context_path())
+        self.returns(fake_context)
+        call = Call(f'{self._fake_context_path()}.__enter__')
+        scenario.current().addEvent(call)
+        return fake_context
+
+    def _fake_context_path(self):
+        return f'{self._fakeObjectPath}.__fake_context__'
+
+    def __exit__(self, type, value, traceback):
+        call = Call(f'{self._fake_context_path()}.__exit__', argumentexpectations.IgnoreArgument(), argumentexpectations.IgnoreArgument(), argumentexpectations.IgnoreArgument())
+        scenario.current().addEvent(call)
 
     def returns( self, result ):
         self._result = result

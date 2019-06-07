@@ -214,13 +214,19 @@ class TestScenario:
             func1Calls[ 2 ] == ( 11, 21 ), { 'name': 'Haim' }
     
     def test_fake_context(self):
-        tempfile_mock = fake.Fake('tempfile')
+        tempfile = fake.Fake('tempfile')
         with scenario.Scenario() as s:
-            s.tempfile.TemporaryFile() >> fake_context.FakeContext('temp_file')
-            s.temp_file.read()
+            with s.tempfile.TemporaryFile() as the_temp_file:
+                pass
 
-            with tempfile_mock.TemporaryFile() as f:
-                f.read()
+            # the_temp_file = tempfile.TemporaryFile()
+            # the_temp_file.__enter__()
+            # the_temp_file.__exit__(1,2,3)
+            # import IPython
+            # IPython.embed()
+            with tempfile.TemporaryFile() as the_temp_file:
+                pass
+                # f.read()
 
     def test_dynamic_fake_names(self):
         with scenario.Scenario() as s:
