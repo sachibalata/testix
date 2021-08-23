@@ -1,14 +1,13 @@
-name: GitHub Actions Demo
+name: Verification
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Unit-Tests:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "The workflow is now ready to test your code on the runner."
-      - name: List files in the repository - ls ${{ github.workspace }}
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "This job's status is ${{ job.status }}."
+      - name: Install package
+        run: pip install -e.'[testing]'
+      - name: unit tests
+        run: 
+          python -m pytest test
