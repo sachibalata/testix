@@ -1,5 +1,8 @@
 name: Verification
-on: [push]
+on:
+    push:
+        branches:
+            - issue_**
 jobs:
   Unit-Tests:
     runs-on: ubuntu-latest
@@ -11,3 +14,13 @@ jobs:
       - name: unit tests
         run: 
           rake units
+  Run-Examples:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository code
+        uses: actions/checkout@v2
+      - name: install testix (editable mode + testing support)
+        run: pip install -e.'[testing]'
+      - name: examples
+        run: 
+          rake examples
