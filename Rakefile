@@ -1,5 +1,5 @@
 task :examples do
-    sh "pytest examples/tests/test_*.py"
+    sh "python -m pytest -sv examples/tests/test_*.py"
 end
 
 task :units do
