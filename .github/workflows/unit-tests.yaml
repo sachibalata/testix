@@ -4,9 +4,9 @@ jobs:
   Unit-Tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: check out repository code
         uses: actions/checkout@v2
-      - name: Install package
+      - name: install testix (editable mode + testing support)
         run: pip install -e.'[testing]'
       - name: unit tests
         run: 
