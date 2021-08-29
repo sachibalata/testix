@@ -1,0 +1,13 @@
+name: Examples
+on: [push]
+jobs:
+  Run-Examples:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository code
+        uses: actions/checkout@v2
+      - name: install testix (editable mode + testing support)
+        run: pip install -e.'[testing]'
+      - name: examples
+        run: 
+          rake examples
