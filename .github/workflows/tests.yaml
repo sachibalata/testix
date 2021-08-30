@@ -5,7 +5,12 @@ on:
             - issue_**
 jobs:
   Unit-Tests:
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
+    strategy:
+        matrix:
+            os:
+             - ubuntu-20.04
+             - windows-latest
     steps:
       - name: check out repository code
         uses: actions/checkout@v2
@@ -15,7 +20,7 @@ jobs:
         run: 
           rake units
   Run-Examples:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: check out repository code
         uses: actions/checkout@v2
@@ -25,14 +30,14 @@ jobs:
         run: 
           rake examples
   Generate-Wheel:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: check out repository code
         uses: actions/checkout@v2
       - name: generate wheel
         run: python setup.py bdist_wheel
   All-OK:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
         - Generate-Wheel
         - Unit-Tests
