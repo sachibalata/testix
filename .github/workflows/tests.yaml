@@ -15,7 +15,7 @@ jobs:
       - name: check out repository code
         uses: actions/checkout@v2
       - name: install testix (editable mode + testing support)
-        run: pip install -e.'[testing]'
+        run: pip install -e."[testing]"
       - name: unit tests
         run: 
           rake units
