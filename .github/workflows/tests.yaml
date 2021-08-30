@@ -34,9 +34,9 @@ jobs:
   All-OK:
     runs-on: ubuntu-latest
     needs:
-        - Generate-Wheel
+        #- Generate-Wheel
         - Unit-Tests
         - Run-Examples
     steps:
-        - name: say hi
-          run: echo all ok
+        - name: verify all tests are included
+          run: rake all_tests_included
