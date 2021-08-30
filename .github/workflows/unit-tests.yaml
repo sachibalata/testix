@@ -27,3 +27,10 @@ jobs:
       - name: examples
         run: 
           rake examples
+  Generate-Wheel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository code
+        uses: actions/checkout@v2
+      - name: generate wheel
+        run: python setup.py bdist_wheel
