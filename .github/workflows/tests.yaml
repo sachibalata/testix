@@ -37,3 +37,6 @@ jobs:
         - Generate-Wheel
         - Unit-Tests
         - Run-Examples
+    steps:
+        - name: say hi
+        - run: echo all ok
