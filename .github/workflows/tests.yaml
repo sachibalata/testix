@@ -39,4 +39,4 @@ jobs:
         - Run-Examples
     steps:
         - name: say hi
-        - run: echo all ok
+          run: echo all ok
